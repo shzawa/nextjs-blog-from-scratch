@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import Layout from '../components/layout'
 import DefaultErrorPage from 'next/error'
+import { ErrorLayout } from '../components/layout'
 
 export default function NotFound() {
   return (
-    <Layout>
+    <ErrorLayout>
       <Head>
         <meta name="robots" content="noindex" />
       </Head>
       <DefaultErrorPage statusCode={404} />
-    </Layout>
+    </ErrorLayout>
   )
 }

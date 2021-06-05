@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Layout from '../../components/layout'
+import { PostLayout } from '../../components/layout'
 import Date from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import utilStyles from '../../styles/utils.module.css'
@@ -13,7 +13,7 @@ export default function Post({ postData }) {
   }
 
   return (
-    <Layout>
+    <PostLayout>
       <Head>
         <title>{postData.title}</title>
       </Head>
@@ -24,7 +24,7 @@ export default function Post({ postData }) {
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
-    </Layout>
+    </PostLayout>
   )
 }
 
@@ -42,7 +42,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // params.idを使用して、ブログの投稿に必要なデータを取得する
   const postData = await getPostData(params.id)
-
   if (!postData) {
     return {
       notFound: true,  // pages/404.jsを自動で出力

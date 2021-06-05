@@ -1,15 +1,15 @@
-import Head from "next/head"
+import HeadField from "next/head"
+import Link from "next/link"
 import styles from "./layout.module.css"
 import utilStyles from "../styles/utils.module.css"
-import Link from "next/link"
 
 const name = "Shotaro Ozawa"
 export const siteTitle = "Next.js Sample Website"
 
-export default function Layout({ children, home }) {
+function DefaultHead() {
   return (
-    <div className={styles.container}>
-      <Head>
+    <>
+      <HeadField>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
@@ -23,43 +23,60 @@ export default function Layout({ children, home }) {
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+      </HeadField>
       <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-              alt={name}
-            />
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
+        <img
+          src="/images/profile.jpg"
+          className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+          alt={name}
+        />
+        <h2 className={utilStyles.headingLg}>
           <Link href="/">
-            <a>← Back to home</a>
+            <a className={utilStyles.colorInherit}>{name}</a>
           </Link>
-        </div>
-      )}
-    </div>
+        </h2>
+      </header>
+    </>
+  )
+}
+
+function Container({ children }) {
+  return <div className={styles.container}>{children}</div>
+}
+
+export function HomeLayout({ children }) {
+  return (
+    <Container>
+      <DefaultHead />
+      <main>{children}</main>
+    </Container>
+  )
+}
+
+export function PostLayout({ children }) {
+  return (
+    <Container>
+      <DefaultHead />
+      <main>{children}</main>
+      <div className={styles.backToHome}>
+        <Link href="/">
+          <a>← Back to home</a>
+        </Link>
+      </div>
+    </Container>
+  )
+}
+
+export function ErrorLayout({ children }) {
+  return (
+    <Container>
+      <DefaultHead />
+      <main>{children}</main>
+      <div className={styles.backToHome}>
+        <Link href="/">
+          <a>← Back to home</a>
+        </Link>
+      </div>
+    </Container>
   )
 }
