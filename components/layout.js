@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { DefaultHead } from './head'
 import { BackToHomeBtn } from './button'
 import styles from "./layout.module.css"
@@ -10,6 +11,15 @@ function Container({ children }) {
       <DefaultHead />
       {children}
     </div>
+  )
+}
+
+// tips: https://github.com/vercel/next.js/issues/5964
+export function TitleWithSiteTitle({ children }) {
+  return (
+    <Head>
+      <title>{children} - {siteTitle}</title>
+    </Head>
   )
 }
 

@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { PostLayout } from '../../components/layout'
+import { PostLayout, TitleWithSiteTitle } from '../../components/layout'
 import Date from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import utilStyles from '../../styles/utils.module.css'
@@ -9,14 +8,17 @@ export default function Post({ postData }) {
   const router = useRouter()
 
   if (router.isFallback) {
-    return <h1>Now Loading...</h1>
+    return (
+      <PostLayout>
+        <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
+        <h1>Now Loading...</h1>
+      </PostLayout>
+    )
   }
 
   return (
     <PostLayout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
+      <TitleWithSiteTitle>{postData.title}</TitleWithSiteTitle>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>

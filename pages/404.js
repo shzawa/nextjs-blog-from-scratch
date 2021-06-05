@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import DefaultErrorPage from 'next/error'
-import { ErrorLayout } from '../components/layout'
+import { ErrorLayout, TitleWithSiteTitle } from '../components/layout'
 
 export default function NotFound() {
   return (
@@ -8,7 +7,8 @@ export default function NotFound() {
       <Head>
         <meta name="robots" content="noindex" />
       </Head>
-      <DefaultErrorPage statusCode={404} />
+      <TitleWithSiteTitle>Not Found</TitleWithSiteTitle>
+      <h1>Not Found</h1>
     </ErrorLayout>
   )
 }
