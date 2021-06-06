@@ -33,7 +33,7 @@ const HomePage = ({ posts }: Posts) => (
       </p>
     </section>
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-      <h2 className={utilStyles.headingLg}>Blog</h2>
+      <h2 className={utilStyles.headingLg}>Articles</h2>
       <ul className={utilStyles.list}>
         {posts.map(({ id, date, title, tags }) => (
           <li className={utilStyles.listItem} key={id}>
