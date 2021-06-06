@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsRe
   }
 }
 
-const HomeComponent = ({ posts }: Posts) => {
+const HomePage = ({ posts }: Posts) => {
   return (
     <HomeLayout>
       <Head>
@@ -51,4 +51,4 @@ const HomeComponent = ({ posts }: Posts) => {
   )
 }
 
-export default HomeComponent
+export default HomePage

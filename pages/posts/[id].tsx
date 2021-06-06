@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { PostLayout, TitleWithSiteTitle } from '../../components/layout'
 import Date from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
+import { markdownToHtml } from '../../lib/markdown'
 import utilStyles from '../../styles/utils.module.css'
 import type { Post } from '../../lib/post'
 
@@ -25,6 +26,8 @@ export async function getStaticProps({ params }) {
     }
   }
 
+  post.content = await markdownToHtml(post.content)
+
   return {
     props: {
       post
@@ -33,9 +36,8 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const PostComponent = ({ post }: Post) => {
+const PostPage = ({ post }: Post) => {
   const router = useRouter()
-
   if (router.isFallback) {
     return (
       <PostLayout>
@@ -53,10 +55,10 @@ const PostComponent = ({ post }: Post) => {
         <div className={utilStyles.lightText}>
           <Date dateStr={post.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
     </PostLayout>
   )
 }
 
-export default PostComponent
+export default PostPage

@@ -1,10 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import remark from 'remark'
-import html from 'remark-html'
-import codeTitle from 'remark-code-titles'
-import highlight from 'remark-highlight.js'
 import type { PostMetaData, PostSummary, PostDetail } from './post.d'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
@@ -51,17 +47,9 @@ export async function getPostData(id: string): Promise<PostDetail> {
     // 投稿のメタデータ部分を解析するためにgray-matterを使う
     const { content, data } = matter(fileContents)
 
-    // MarkdownをHTML文字列に変換する為にremarkを使う
-    const processedContent = await remark()
-      .use(codeTitle)
-      .use(highlight)
-      .use(html)
-      .process(content)
-    const contentHtml = processedContent.toString()
-
     return {
       id,
-      contentHtml,
+      content,
       ...(data as PostMetaData)
     }
   } catch (err) {

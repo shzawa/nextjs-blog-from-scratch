@@ -13,7 +13,7 @@ export interface Posts {
 
 export interface PostDetail extends PostMetaData {
   id: string,
-  contentHtml: string,
+  content: string,
 }
 
 export interface Post {
