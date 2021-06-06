@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { DefaultHead } from './head'
-import { BackToHomeBtn } from './button'
+import { BackToHomeBtn, TagBtn } from './button';
 import styles from "./layout.module.css"
 
 export const siteTitle = "Next.js Sample Website"
@@ -52,3 +52,23 @@ export function ErrorLayout({ children }) {
     </Container>
   )
 }
+
+export const TagsLayout = (
+    { tags, key, className, tagClassName }:
+    {
+      tags: string[],
+      key: string,
+      className?: string,
+      tagClassName?: string
+    }
+  ) => (
+  <ul className={className}>
+    {tags.map(tag => (
+      <li key={`${key}-${tag}`}>
+        <TagBtn className={tagClassName}>
+          {tag}
+        </TagBtn>
+      </li>
+    ))}
+  </ul>
+)

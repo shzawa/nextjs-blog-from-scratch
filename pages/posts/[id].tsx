@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
-import { PostLayout, TitleWithSiteTitle } from '../../components/layout'
-import Date from '../../components/date'
+import { PostLayout, TitleWithSiteTitle, TagsLayout } from '../../components/layout';
+import { Date } from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import { markdownToHtml } from '../../lib/markdown'
 import utilStyles from '../../styles/utils.module.css'
+import layoutStyles from '../../components/layout.module.css'
 import type { Post } from '../../lib/post'
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
@@ -36,7 +37,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const PostPage = ({ post }: Post) => {
+const PostPage = ({ post: { title, date, tags, id, content } }: Post) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
@@ -49,13 +50,19 @@ const PostPage = ({ post }: Post) => {
 
   return (
     <PostLayout>
-      <TitleWithSiteTitle>{post.title}</TitleWithSiteTitle>
+      <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
       <article>
-        <h1 className={utilStyles.headingXl}>{post.title}</h1>
+        <h1 className={utilStyles.headingXl}>{title}</h1>
+        <TagsLayout
+          tags={tags}
+          key={id}
+          className={layoutStyles.tags}
+          tagClassName={layoutStyles.tagPostDetail}
+        />
         <div className={utilStyles.lightText}>
-          <Date dateStr={post.date} />
+          <Date dateStr={date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </article>
     </PostLayout>
   )
