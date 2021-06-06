@@ -4,8 +4,6 @@ import styles from "./layout.module.css"
 import utilStyles from "../styles/utils.module.css"
 import { siteTitle } from './layout'
 
-const name = "Shotaro Ozawa"
-
 export function DefaultHead() {
   return (
     <>
@@ -25,14 +23,9 @@ export function DefaultHead() {
         <meta name="twitter:card" content="summary_large_image" />
       </HeadField>
       <header className={styles.header}>
-        <img
-          src="/images/profile.jpg"
-          className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-          alt={name}
-        />
         <h2 className={utilStyles.headingLg}>
           <Link href="/">
-            <a className={utilStyles.colorInherit}>{name}</a>
+            <a className={utilStyles.colorInherit}>{siteTitle}</a>
           </Link>
         </h2>
       </header>

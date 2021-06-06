@@ -3,7 +3,7 @@ import { DefaultHead } from './head'
 import { BackToHomeBtn, TagBtn } from './button';
 import styles from "./layout.module.css"
 
-export const siteTitle = "Next.js Sample Website"
+export const siteTitle = "Fragment"
 
 function Container({ children }) {
   return (
