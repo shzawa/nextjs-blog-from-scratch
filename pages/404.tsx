@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { ErrorLayout, TitleWithSiteTitle } from '../components/layout'
 
-export default function NotFound() {
+const NotFound = () => {
   return (
     <ErrorLayout>
       <Head>
@@ -12,3 +12,5 @@ export default function NotFound() {
     </ErrorLayout>
   )
 }
+
+export default NotFound

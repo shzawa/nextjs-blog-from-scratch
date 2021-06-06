@@ -3,32 +3,7 @@ import { PostLayout, TitleWithSiteTitle } from '../../components/layout'
 import Date from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import utilStyles from '../../styles/utils.module.css'
-
-export default function Post({ postData }) {
-  const router = useRouter()
-
-  if (router.isFallback) {
-    return (
-      <PostLayout>
-        <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
-        <h1>Now Loading...</h1>
-      </PostLayout>
-    )
-  }
-
-  return (
-    <PostLayout>
-      <TitleWithSiteTitle>{postData.title}</TitleWithSiteTitle>
-      <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateStr={postData.date} />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
-    </PostLayout>
-  )
-}
+import type { Post } from '../../lib/post'
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
 export async function getStaticPaths() {
@@ -43,8 +18,8 @@ export async function getStaticPaths() {
 // 静的データの生成
 export async function getStaticProps({ params }) {
   // params.idを使用して、ブログの投稿に必要なデータを取得する
-  const postData = await getPostData(params.id)
-  if (!postData) {
+  const post = await getPostData(params.id)
+  if (!post) {
     return {
       notFound: true,  // pages/404.jsを自動で出力
     }
@@ -52,8 +27,36 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      postData
+      post
     },
     revalidate: 1,
   }
 }
+
+const PostComponent = ({ post }: Post) => {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return (
+      <PostLayout>
+        <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
+        <h1>Now Loading...</h1>
+      </PostLayout>
+    )
+  }
+
+  return (
+    <PostLayout>
+      <TitleWithSiteTitle>{post.title}</TitleWithSiteTitle>
+      <article>
+        <h1 className={utilStyles.headingXl}>{post.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateStr={post.date} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      </article>
+    </PostLayout>
+  )
+}
+
+export default PostComponent

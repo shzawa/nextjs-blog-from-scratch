@@ -2,7 +2,7 @@ import HeadField from "next/head"
 import Link from "next/link"
 import styles from "./layout.module.css"
 import utilStyles from "../styles/utils.module.css"
-import { siteTitle } from '../components/layout'
+import { siteTitle } from './layout'
 
 const name = "Shotaro Ozawa"
 
