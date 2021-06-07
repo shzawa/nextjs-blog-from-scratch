@@ -5,30 +5,28 @@ import type { PostMetaData, PostSummary, PostDetail } from './post.d'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getSortedPostsData(): PostSummary[] {
-  // /posts 配下のファイル名を取得する
-  const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map(fileName => {
-    // id を取得する為にファイル名から".md"を削除する
-    const id = fileName.replace(/\.md$/, '')
-
-    // マークダウンファイルを文字列として読み取る
-    const fullPath = path.join(postsDirectory, fileName)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-
-    // 投稿のメタデータ部分を解析するためにgray-matterを使う
-    const { data } = matter(fileContents)
-
-    return {
-      id,
-      ...(data as PostMetaData)
-    }
-  })
-
-  // 投稿を日付でソートする
-  return allPostsData.sort((a, b) => a.date < b.date ? 1 : -1)
+const getPostSummaryByNameFromMd = (fileName: string): PostSummary => {
+  const id = fileName.replace(/\.md$/, '')
+  const fullPath = path.join(postsDirectory, fileName)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const { data } = matter(fileContents)
+  return {
+    id,
+    ...(data as PostMetaData)
+  }
 }
 
+export function getSortedPosts(): PostSummary[] {
+  const fileNames = fs.readdirSync(postsDirectory)
+  const posts = fileNames.map(fileName => getPostSummaryByNameFromMd(fileName))
+  return posts.sort((a, b) => a.date < b.date ? 1 : -1) // 投稿を日付でソートする
+}
+
+export function filterPostsByTag(posts: PostSummary[] ,entryTag: string) {
+  return posts.filter(({tags}) => tags.includes(entryTag))
+}
+
+// TODO: 戻り値の型決め打ちしたい
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
 
@@ -37,6 +35,19 @@ export function getAllPostIds() {
       id: fileName.replace(/\.md$/, '')
     }
   }))
+}
+
+// TODO: 戻り値の型決め打ちしたい
+export const getUniqueAllTags = () => {
+  const allPosts = getSortedPosts()
+  return allPosts.map(({ tags }) => tags)
+    .flat()
+    .filter((tag, index, self) => self.indexOf(tag) === index)
+    .map(tag => ({
+      params: {
+        tag
+      }
+    }))
 }
 
 export async function getPostData(id: string): Promise<PostDetail> {

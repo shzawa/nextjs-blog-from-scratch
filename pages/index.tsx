@@ -1,24 +1,27 @@
-import { GetStaticProps, GetStaticPropsResult } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { HomeLayout, siteTitle, TagsLayout } from '../components/layout'
 import { Date } from '../components/date'
-import utilStyles from '../styles/utils.module.css'
 import layoutStyles from '../components/layout.module.css'
-import { getSortedPostsData } from '../lib/posts'
-import type { Posts } from '../lib/post';
+import utilStyles from '../styles/utils.module.css'
+import { getSortedPosts } from '../lib/posts'
+import { PostSummary } from '../lib/post';
 
-export const getStaticProps: GetStaticProps =
-  async (): Promise<GetStaticPropsResult<Posts>> => {
-    const posts = getSortedPostsData()
-    return {
-      props: {
-        posts
-      }
-    }
+interface Props {
+  posts: PostSummary[]
 }
 
-const HomePage = ({ posts }: Posts) => (
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const posts = getSortedPosts()
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+const HomePage = ({ posts }: Props) => (
   <HomeLayout>
     <Head>
       <title>{siteTitle}</title>

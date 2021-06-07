@@ -5,18 +5,10 @@ export interface PostMetaData {
 }
 
 export interface PostSummary extends PostMetaData {
-  id: string,
-}
-
-export interface Posts {
-  posts: PostSummary[]
+  id: string
 }
 
 export interface PostDetail extends PostMetaData {
   id: string,
-  content: string,
-}
-
-export interface Post {
-  post: PostDetail
+  content: string
 }

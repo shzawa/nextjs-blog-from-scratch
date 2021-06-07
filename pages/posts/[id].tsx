@@ -1,14 +1,24 @@
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring';
 import { PostLayout, TitleWithSiteTitle, TagsLayout } from '../../components/layout';
 import { Date } from '../../components/date'
-import { getAllPostIds, getPostData } from '../../lib/posts'
-import { markdownToHtml } from '../../lib/markdown'
 import utilStyles from '../../styles/utils.module.css'
 import layoutStyles from '../../components/layout.module.css'
-import type { Post } from '../../lib/post'
+import { markdownToHtml } from '../../lib/markdown'
+import { getAllPostIds, getPostData } from '../../lib/posts'
+import { PostDetail } from '../../lib/post'
+
+interface Props {
+  post: PostDetail
+}
+
+interface Params extends ParsedUrlQuery {
+  id: string
+}
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   // idとしてとりうる値のリストを返す
   const paths = getAllPostIds()
   return {
@@ -18,9 +28,9 @@ export async function getStaticPaths() {
 }
 
 // 静的データの生成
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { id } }) => {
   // params.idを使用して、ブログの投稿に必要なデータを取得する
-  const post = await getPostData(params.id)
+  const post = await getPostData(id)
   if (!post) {
     return {
       notFound: true,  // pages/404.jsを自動で出力
@@ -37,7 +47,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const PostPage = ({ post: { title, date, tags, id, content } }: Post) => {
+const PostPage = ({ post: { title, date, tags, id, content } }: Props) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
