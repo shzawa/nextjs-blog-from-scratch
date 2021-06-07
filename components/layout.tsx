@@ -64,7 +64,7 @@ export const TagsLayout = (
   ) => (
   <ul className={className}>
     {tags.map(tag => (
-      <li key={`${key}-${tag}`}>
+      <li key={`${key}_${tag}`}>
         <TagBtn className={tagClassName}>
           {tag}
         </TagBtn>
