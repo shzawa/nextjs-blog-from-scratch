@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring';
 import { PostLayout, TitleWithSiteTitle, TagsLayout } from '../../components/layout';
 import { Date } from '../../components/date'
-import utilStyles from '../../styles/utils.module.css'
 import layoutStyles from '../../components/layout.module.css'
+import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import { PostDetail } from '../../lib/post'

@@ -22,8 +22,10 @@ export function getSortedPosts(): PostSummary[] {
   return posts.sort((a, b) => a.date < b.date ? 1 : -1) // 投稿を日付でソートする
 }
 
-export function filterPostsByTag(posts: PostSummary[] ,entryTag: string) {
-  return posts.filter(({tags}) => tags.includes(entryTag))
+export function getSortedPostsByTag(tag: string) {
+  const fileNames = fs.readdirSync(postsDirectory)
+  return fileNames.map(fileName => getPostSummaryByNameFromMd(fileName))
+    .filter(({tags}) => tags.includes(tag))
 }
 
 // TODO: 戻り値の型決め打ちしたい
