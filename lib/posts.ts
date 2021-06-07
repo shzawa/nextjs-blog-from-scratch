@@ -5,10 +5,10 @@ import type { PostMetaData, PostSummary, PostDetail } from './post.d'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getSortedPostsData(): PostSummary[] {
+export function getSortedPosts(): PostSummary[] {
   // /posts 配下のファイル名を取得する
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map(fileName => {
+  const posts = fileNames.map(fileName => {
     // id を取得する為にファイル名から".md"を削除する
     const id = fileName.replace(/\.md$/, '')
 
@@ -26,7 +26,7 @@ export function getSortedPostsData(): PostSummary[] {
   })
 
   // 投稿を日付でソートする
-  return allPostsData.sort((a, b) => a.date < b.date ? 1 : -1)
+  return posts.sort((a, b) => a.date < b.date ? 1 : -1)
 }
 
 export function filterPostsByTag(posts: PostSummary[] ,entryTag: string) {

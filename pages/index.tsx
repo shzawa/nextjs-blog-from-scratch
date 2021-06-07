@@ -5,12 +5,12 @@ import { HomeLayout, siteTitle, TagsLayout } from '../components/layout'
 import { Date } from '../components/date'
 import utilStyles from '../styles/utils.module.css'
 import layoutStyles from '../components/layout.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import { getSortedPosts } from '../lib/posts'
 import type { Posts } from '../lib/post';
 
 export const getStaticProps: GetStaticProps =
   async (): Promise<GetStaticPropsResult<Posts>> => {
-    const posts = getSortedPostsData()
+    const posts = getSortedPosts()
     return {
       props: {
         posts
