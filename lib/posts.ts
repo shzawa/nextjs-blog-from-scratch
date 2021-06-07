@@ -29,6 +29,10 @@ export function getSortedPostsData(): PostSummary[] {
   return allPostsData.sort((a, b) => a.date < b.date ? 1 : -1)
 }
 
+export function filterPostsByTag(posts: PostSummary[] ,entryTag: string) {
+  return posts.filter(({tags}) => tags.includes(entryTag))
+}
+
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
 

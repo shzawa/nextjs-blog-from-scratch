@@ -6,6 +6,8 @@ import { markdownToHtml } from '../../lib/markdown'
 import utilStyles from '../../styles/utils.module.css'
 import layoutStyles from '../../components/layout.module.css'
 import type { Post } from '../../lib/post'
+import { GetStaticProps } from 'next';
+import { isStringObject } from 'util/types';
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
 export async function getStaticPaths() {
@@ -18,9 +20,9 @@ export async function getStaticPaths() {
 }
 
 // 静的データの生成
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   // params.idを使用して、ブログの投稿に必要なデータを取得する
-  const post = await getPostData(params.id)
+  const post = await getPostData(isStringObject(id) ? id : '')
   if (!post) {
     return {
       notFound: true,  // pages/404.jsを自動で出力
