@@ -18,7 +18,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   // idとしてとりうる値のリストを返す
   const paths = getAllPostIds()
   return {
