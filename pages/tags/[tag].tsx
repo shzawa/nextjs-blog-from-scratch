@@ -34,9 +34,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { tag } }) => {
   const posts = getSortedPostsByTag(tag)
 
-  // FIXME: 404ページに飛ばない & 404ページをこのページ用に別途用意したい
-  // NOTE: postsは空配列のため !posts.length では？
-  if (!posts) {
+  if (!posts.length) {
     return {
       notFound: true
     }
