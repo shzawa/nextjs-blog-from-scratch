@@ -1,4 +1,5 @@
-import { GetStaticProps } from 'next';
+import { FunctionComponent } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring';
 import { PostLayout, TitleWithSiteTitle, TagsLayout } from '../../components/layout';
@@ -18,7 +19,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   // idとしてとりうる値のリストを返す
   const postIds = getAllPostIds()
   return {
@@ -51,7 +52,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { 
   }
 }
 
-const PostPage = ({ post: { title, date, tags, id, content } }: Props) => {
+const PostPage: FunctionComponent<Props> = ({ post: { title, date, tags, id, content } }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (

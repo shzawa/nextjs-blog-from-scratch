@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -21,7 +22,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   }
 }
 
-const HomePage = ({ posts }: Props) => (
+const HomePage: FunctionComponent<Props> = ({ posts }) => (
   <HomeLayout>
     <Head>
       <title>{siteTitle}</title>

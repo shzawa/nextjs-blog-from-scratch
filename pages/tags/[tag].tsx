@@ -1,4 +1,5 @@
-import { GetStaticProps } from 'next';
+import { FunctionComponent } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -19,7 +20,7 @@ interface Params extends ParsedUrlQuery {
   tag: string
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const tags = getUniqueAllTags()
   return {
     paths: tags.map(tag => ({
@@ -49,7 +50,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { 
   }
 }
 
-const TagListPage = ({ posts, tag }: Props) => {
+const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
