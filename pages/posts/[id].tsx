@@ -7,7 +7,7 @@ import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
 import { getAllPostIds, getPostData } from '../../lib/posts'
-import { PostDetail } from '../../lib/post'
+import { PostDetail } from '../../types/post'
 
 interface Props {
   post: PostDetail
@@ -20,9 +20,13 @@ interface Params extends ParsedUrlQuery {
 // 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
 export const getStaticPaths = async () => {
   // idとしてとりうる値のリストを返す
-  const paths = getAllPostIds()
+  const postIds = getAllPostIds()
   return {
-    paths,
+    paths: postIds.map((postId) => ({
+      params: {
+        id: postId
+      }
+    })),
     fallback: true,
   }
 }

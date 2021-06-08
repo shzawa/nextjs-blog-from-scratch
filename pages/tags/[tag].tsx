@@ -8,7 +8,7 @@ import { Date } from '../../components/date';
 import layoutStyles from '../../components/layout.module.css';
 import utilStyles from '../../styles/utils.module.css'
 import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts';
-import { PostSummary } from '../../lib/post';
+import { PostSummary } from '../../types/post';
 
 interface Props {
   posts: PostSummary[],
@@ -20,9 +20,13 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticPaths = async () => {
-  const paths = getUniqueAllTags()
+  const tags = getUniqueAllTags()
   return {
-    paths,
+    paths: tags.map(tag => ({
+      params: {
+        tag
+      }
+    })),
     fallback: true,
   }
 }
@@ -31,6 +35,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { 
   const posts = getSortedPostsByTag(tag)
 
   // FIXME: 404ページに飛ばない & 404ページをこのページ用に別途用意したい
+  // NOTE: postsは空配列のため !posts.length では？
   if (!posts) {
     return {
       notFound: true
