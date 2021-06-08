@@ -7,7 +7,7 @@ import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
 import { getAllPostIds, getPostData } from '../../lib/posts'
-import { PostDetail } from '../../lib/post'
+import { PostDetail } from '../../types/post'
 
 interface Props {
   post: PostDetail

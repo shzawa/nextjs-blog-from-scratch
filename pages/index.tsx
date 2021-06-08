@@ -6,7 +6,7 @@ import { Date } from '../components/date'
 import layoutStyles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
-import { PostSummary } from '../lib/post';
+import { PostSummary } from '../types/post';
 
 interface Props {
   posts: PostSummary[]
