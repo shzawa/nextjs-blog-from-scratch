@@ -28,28 +28,15 @@ export function getSortedPostsByTag(tag: string) {
     .filter(({tags}) => tags.includes(tag))
 }
 
-// TODO: 戻り値の型決め打ちしたい
-export function getAllPostIds() {
+export function getAllPostIds(): string[] {
   const fileNames = fs.readdirSync(postsDirectory)
-
-  return fileNames.map(fileName => ({
-    params: {
-      id: fileName.replace(/\.md$/, '')
-    }
-  }))
+  return fileNames.map(fileName => fileName.replace(/\.md$/, ''))
 }
 
-// TODO: 戻り値の型決め打ちしたい
-export const getUniqueAllTags = () => {
+export const getUniqueAllTags = (): string[] => {
   const allPosts = getSortedPosts()
-  return allPosts.map(({ tags }) => tags)
-    .flat()
+  return allPosts.flatMap(({ tags }) => tags)
     .filter((tag, index, self) => self.indexOf(tag) === index)
-    .map(tag => ({
-      params: {
-        tag
-      }
-    }))
 }
 
 export async function getPostData(id: string): Promise<PostDetail> {
