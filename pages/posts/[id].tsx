@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
-import { PostPageLayout, TitleWithSiteTitle } from '../../components/layout'
+import { PostPageLayout } from '../../components/layout'
 import { Date } from '../../components/date'
 import { Tags } from '../../components/tags'
 import layoutStyles from '../../components/layout.module.css'
@@ -61,16 +61,14 @@ const PostPage: FunctionComponent<Props> = ({
   const router = useRouter()
   if (router.isFallback) {
     return (
-      <PostPageLayout router={router}>
-        <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
+      <PostPageLayout title={`Now Loading...`} router={router}>
         <h1>Now Loading...</h1>
       </PostPageLayout>
     )
   }
 
   return (
-    <PostPageLayout router={router}>
-      <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
+    <PostPageLayout title={title} router={router}>
       <article>
         <h1 className={utilStyles.headingXl}>{title}</h1>
         <Tags

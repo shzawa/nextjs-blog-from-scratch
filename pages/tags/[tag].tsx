@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
-import { TagPageLayout, TitleWithSiteTitle } from '../../components/layout'
+import { TagPageLayout } from '../../components/layout'
 import { Date } from '../../components/date'
 import { Tags } from '../../components/tags'
 import layoutStyles from '../../components/layout.module.css'
@@ -19,6 +19,8 @@ interface Props {
 interface Params extends ParsedUrlQuery {
   tag: string
 }
+
+const setTitle = (title: string) => `${title} - タグで絞り込み`
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags = getUniqueAllTags()
@@ -52,16 +54,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
 }
 
-const TagsPageTitle: FunctionComponent<{ tag: string }> = ({ tag }) => (
-  <TitleWithSiteTitle>{tag}タグで絞り込み</TitleWithSiteTitle>
-)
-
 const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
-      <TagPageLayout>
-        <TagsPageTitle tag={tag} />
+      <TagPageLayout title={setTitle(tag)}>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
           Now Loading...
@@ -72,8 +69,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
 
   // 戻るページほしいっす
   return (
-    <TagPageLayout>
-      <TagsPageTitle tag={tag} />
+    <TagPageLayout title={setTitle(tag)}>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
         <ul className={utilStyles.list}>

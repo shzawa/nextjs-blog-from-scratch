@@ -10,6 +10,7 @@ export const siteTitle = 'Fragment'
 
 interface Props {
   children: ReactNode
+  title?: string // FIXME
 }
 
 interface PostProps extends Props {
@@ -35,15 +36,20 @@ export const TitleWithSiteTitle: FunctionComponent<Props> = ({ children }) => (
 export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
     <HeaderProfile />
+    <Head>
+      <title>{siteTitle}</title>
+    </Head>
     <main>{children}</main>
   </Container>
 )
 
 export const PostPageLayout: FunctionComponent<PostProps> = ({
   children,
+  title,
   router,
 }) => (
   <Container>
+    <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToPreviousBtn router={router} />
@@ -51,8 +57,12 @@ export const PostPageLayout: FunctionComponent<PostProps> = ({
   </Container>
 )
 
-export const TagPageLayout: FunctionComponent<Props> = ({ children }) => (
+export const TagPageLayout: FunctionComponent<Props> = ({
+  children,
+  title,
+}) => (
   <Container>
+    <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
     <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>

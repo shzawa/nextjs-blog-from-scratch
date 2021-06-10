@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
-import { HomePageLayout, siteTitle } from '../components/layout'
+import { HomePageLayout } from '../components/layout'
 import { Date } from '../components/date'
 import { Tags } from '../components/tags'
 import layoutStyles from '../components/layout.module.css'
@@ -25,9 +24,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
 const HomePage: FunctionComponent<Props> = ({ posts }) => (
   <HomePageLayout>
-    <Head>
-      <title>{siteTitle}</title>
-    </Head>
     <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
       <h2 className={utilStyles.headingLg}>Articles</h2>
       <ul className={utilStyles.list}>
