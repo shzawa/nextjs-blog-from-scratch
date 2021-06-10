@@ -22,7 +22,7 @@ interface Params extends ParsedUrlQuery {
 
 const setTitle = (title: string) => `${title} - タグで絞り込み`
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const tags = getUniqueAllTags()
   return {
     paths: tags.map((tag) => ({

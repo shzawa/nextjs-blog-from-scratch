@@ -19,7 +19,7 @@ interface Params extends ParsedUrlQuery {
   id: string
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const postIds = getAllPostIds()
   return {
     paths: postIds.map((postId) => ({
