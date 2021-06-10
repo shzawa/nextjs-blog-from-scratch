@@ -42,10 +42,30 @@ export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
 
 export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
+    <header className={utilStyles.headingMd}>
+      <p>ども</p>
+      <p>
+        (This is a sample website - you’ll be building a site like this on{' '}
+        <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
+      </p>
+    </header>
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToHomeBtn />
     </div>
+  </Container>
+)
+
+export const TagPageLayout: FunctionComponent<Props> = ({ children }) => (
+  <Container>
+    <header className={utilStyles.headingMd}>
+      <p>ども</p>
+      <p>
+        (This is a sample website - you’ll be building a site like this on{' '}
+        <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
+      </p>
+    </header>
+    <main>{children}</main>
   </Container>
 )
 

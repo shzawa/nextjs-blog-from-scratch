@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import {
-  HomePageLayout,
+  TagPageLayout,
   TagsLayout,
   TitleWithSiteTitle,
 } from '../../components/layout'
@@ -63,7 +63,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
-      <HomePageLayout>
+      <TagPageLayout>
         <TagsPageTitle tag={tag} />
         <section className={utilStyles.headingMd}>
           <p>ども</p>
@@ -76,13 +76,13 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
           <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
           Now Loading...
         </section>
-      </HomePageLayout>
+      </TagPageLayout>
     )
   }
 
   // 戻るページほしいっす
   return (
-    <HomePageLayout>
+    <TagPageLayout>
       <TagsPageTitle tag={tag} />
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
@@ -104,7 +104,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
           ))}
         </ul>
       </section>
-    </HomePageLayout>
+    </TagPageLayout>
   )
 }
 
