@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { HomeLayout, siteTitle, TagsLayout } from '../components/layout'
+import { HomePageLayout, siteTitle, TagsLayout } from '../components/layout'
 import { Date } from '../components/date'
 import layoutStyles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 }
 
 const HomePage: FunctionComponent<Props> = ({ posts }) => (
-  <HomeLayout>
+  <HomePageLayout>
     <Head>
       <title>{siteTitle}</title>
     </Head>
@@ -47,7 +47,7 @@ const HomePage: FunctionComponent<Props> = ({ posts }) => (
         ))}
       </ul>
     </section>
-  </HomeLayout>
+  </HomePageLayout>
 )
 
 export default HomePage

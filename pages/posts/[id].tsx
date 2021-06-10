@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import {
-  PostLayout,
+  PostPageLayout,
   TitleWithSiteTitle,
   TagsLayout,
 } from '../../components/layout'
@@ -64,15 +64,15 @@ const PostPage: FunctionComponent<Props> = ({
   const router = useRouter()
   if (router.isFallback) {
     return (
-      <PostLayout>
+      <PostPageLayout>
         <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
         <h1>Now Loading...</h1>
-      </PostLayout>
+      </PostPageLayout>
     )
   }
 
   return (
-    <PostLayout>
+    <PostPageLayout>
       <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
       <article>
         <h1 className={utilStyles.headingXl}>{title}</h1>
@@ -87,7 +87,7 @@ const PostPage: FunctionComponent<Props> = ({
         </div>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </article>
-    </PostLayout>
+    </PostPageLayout>
   )
 }
 

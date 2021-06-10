@@ -27,7 +27,7 @@ export const TitleWithSiteTitle: FunctionComponent<Props> = ({ children }) => (
   </Head>
 )
 
-export const HomeLayout: FunctionComponent<Props> = ({ children }) => (
+export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
     <header className={utilStyles.headingMd}>
       <p>ども</p>
@@ -40,7 +40,7 @@ export const HomeLayout: FunctionComponent<Props> = ({ children }) => (
   </Container>
 )
 
-export const PostLayout: FunctionComponent<Props> = ({ children }) => (
+export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
     <main>{children}</main>
     <div className={styles.backToHome}>
@@ -49,7 +49,7 @@ export const PostLayout: FunctionComponent<Props> = ({ children }) => (
   </Container>
 )
 
-export const ErrorLayout: FunctionComponent<Props> = ({ children }) => (
+export const ErrorPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
     <main>{children}</main>
     <div className={styles.backToHome}>
