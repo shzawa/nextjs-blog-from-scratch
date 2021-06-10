@@ -1,7 +1,8 @@
+import { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { ErrorLayout, TitleWithSiteTitle } from '../../components/layout'
 
-const NotFound = () => {
+const NotFound: FunctionComponent = () => {
   return (
     <ErrorLayout>
       <Head>

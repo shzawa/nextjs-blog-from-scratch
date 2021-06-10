@@ -12,49 +12,51 @@ const getPostSummaryByNameFromMd = (fileName: string): PostSummary => {
   const { data } = matter(fileContents)
   return {
     id,
-    ...(data as PostMetaData)
+    ...(data as PostMetaData),
   }
 }
 
-export function getSortedPosts(): PostSummary[] {
+export const getSortedPosts = (): PostSummary[] => {
   const fileNames = fs.readdirSync(postsDirectory)
-  const posts = fileNames.map(fileName => getPostSummaryByNameFromMd(fileName))
-  return posts.sort((a, b) => a.date < b.date ? 1 : -1) // 投稿を日付でソートする
+  const posts = fileNames.map((fileName) =>
+    getPostSummaryByNameFromMd(fileName),
+  )
+  return posts.sort((a, b) => (a.date < b.date ? 1 : -1)) // 投稿を日付でソートする
 }
 
-export function getSortedPostsByTag(tag: string) {
+export const getSortedPostsByTag = (tag: string): PostSummary[] => {
   const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map(fileName => getPostSummaryByNameFromMd(fileName))
-    .filter(({tags}) => tags.includes(tag))
+  return fileNames
+    .map((fileName) => getPostSummaryByNameFromMd(fileName))
+    .filter(({ tags }) => tags.includes(tag))
 }
 
-export function getAllPostIds(): string[] {
+export const getAllPostIds = (): string[] => {
   const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map(fileName => fileName.replace(/\.md$/, ''))
+  return fileNames.map((fileName) => fileName.replace(/\.md$/, ''))
 }
 
 export const getUniqueAllTags = (): string[] => {
   const allPosts = getSortedPosts()
-  return allPosts.flatMap(({ tags }) => tags)
+  return allPosts
+    .flatMap(({ tags }) => tags)
     .filter((tag, index, self) => self.indexOf(tag) === index)
 }
 
-export async function getPostData(id: string): Promise<PostDetail> {
+export const getPostData = async (id: string): Promise<PostDetail> => {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   try {
     const fileContents = fs.readFileSync(fullPath, 'utf8')
 
     // 投稿のメタデータ部分を解析するためにgray-matterを使う
     const { content, data } = matter(fileContents)
-
     return {
       id,
       content,
-      ...(data as PostMetaData)
+      ...(data as PostMetaData),
     }
   } catch (err) {
     console.error(err)
   }
-
   return
 }

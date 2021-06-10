@@ -1,6 +1,6 @@
 export interface PostMetaData {
-  date: string,
-  title: string,
+  date: string
+  title: string
   tags: string[]
 }
 
@@ -9,6 +9,6 @@ export interface PostSummary extends PostMetaData {
 }
 
 export interface PostDetail extends PostMetaData {
-  id: string,
+  id: string
   content: string
 }
