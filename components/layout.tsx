@@ -14,7 +14,6 @@ interface Props {
 const Container: FunctionComponent = ({ children }) => (
   <div className={styles.container}>
     <DefaultHead />
-    <HeaderProfile />
     {children}
   </div>
 )
@@ -30,6 +29,7 @@ export const TitleWithSiteTitle: FunctionComponent<Props> = ({ children }) => (
 
 export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
+    <HeaderProfile />
     <main>{children}</main>
   </Container>
 )
@@ -45,12 +45,14 @@ export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
 
 export const TagPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
+    <HeaderProfile />
     <main>{children}</main>
   </Container>
 )
 
 export const ErrorPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
+    <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToHomeBtn />
