@@ -5,7 +5,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { siteTitle } from './layout'
 
-export const DefaultHead: FunctionComponent = () => (
+export const HeadDefault: FunctionComponent = () => (
   <>
     <HeadField>
       <link rel="icon" href="/favicon.ico" />

@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from 'react'
 import Head from 'next/head'
-import { DefaultHead } from './head'
+import { HeadDefault } from './head'
 import { HeaderProfile } from './header'
 import { BackToHomeBtn, TagBtn } from './button'
 import styles from './layout.module.css'
@@ -13,7 +13,7 @@ interface Props {
 
 const Container: FunctionComponent = ({ children }) => (
   <div className={styles.container}>
-    <DefaultHead />
+    <HeadDefault />
     {children}
   </div>
 )
