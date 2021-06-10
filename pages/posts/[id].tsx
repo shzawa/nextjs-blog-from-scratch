@@ -1,8 +1,12 @@
-import { FunctionComponent } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { FunctionComponent } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring';
-import { PostLayout, TitleWithSiteTitle, TagsLayout } from '../../components/layout';
+import { ParsedUrlQuery } from 'querystring'
+import {
+  PostLayout,
+  TitleWithSiteTitle,
+  TagsLayout,
+} from '../../components/layout'
 import { Date } from '../../components/date'
 import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
@@ -25,20 +29,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: postIds.map((postId) => ({
       params: {
-        id: postId
-      }
+        id: postId,
+      },
     })),
     fallback: true,
   }
 }
 
 // 静的データの生成
-export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { id } }) => {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params: { id },
+}) => {
   // params.idを使用して、ブログの投稿に必要なデータを取得する
   const post = await getPostData(id)
   if (!post) {
     return {
-      notFound: true,  // pages/404.jsを自動で出力
+      notFound: true, // pages/404.jsを自動で出力
     }
   }
 
@@ -46,13 +52,15 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { 
 
   return {
     props: {
-      post
+      post,
     },
     revalidate: 1,
   }
 }
 
-const PostPage: FunctionComponent<Props> = ({ post: { title, date, tags, id, content } }) => {
+const PostPage: FunctionComponent<Props> = ({
+  post: { title, date, tags, id, content },
+}) => {
   const router = useRouter()
   if (router.isFallback) {
     return (

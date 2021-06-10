@@ -10,7 +10,7 @@ interface Props {
   children: ReactNode
 }
 
-const Container: FunctionComponent  = ({ children }) => (
+const Container: FunctionComponent = ({ children }) => (
   <div className={styles.container}>
     <DefaultHead />
     {children}
@@ -49,11 +49,11 @@ export const ErrorLayout: FunctionComponent<Props> = ({ children }) => (
 )
 
 export const TagsLayout: FunctionComponent<{
-    tags: string[],
-    key: string,
-    className?: string,
-    tagClassName?: string
-  }> = ({ tags, key, className, tagClassName }) => (
+  tags: string[],
+  key: string,
+  className?: string,
+  tagClassName?: string
+}> = ({ tags, key, className, tagClassName }) => (
   <ul className={className}>
     {tags.map(tag => (
       <li key={`${String(key).replace(/_/g, '-')}_${tag}`}>

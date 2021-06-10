@@ -1,18 +1,18 @@
-import { FunctionComponent } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import { ParsedUrlQuery } from 'querystring';
-import { siteTitle, HomeLayout, TagsLayout } from '../../components/layout';
-import { Date } from '../../components/date';
-import layoutStyles from '../../components/layout.module.css';
+import { FunctionComponent } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import Link from 'next/link'
+import { ParsedUrlQuery } from 'querystring'
+import { siteTitle, HomeLayout, TagsLayout } from '../../components/layout'
+import { Date } from '../../components/date'
+import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
-import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts';
-import { PostSummary } from '../../types/post';
+import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts'
+import { PostSummary } from '../../types/post'
 
 interface Props {
-  posts: PostSummary[],
+  posts: PostSummary[]
   tag: string
 }
 
@@ -23,28 +23,30 @@ interface Params extends ParsedUrlQuery {
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags = getUniqueAllTags()
   return {
-    paths: tags.map(tag => ({
+    paths: tags.map((tag) => ({
       params: {
-        tag
-      }
+        tag,
+      },
     })),
     fallback: true,
   }
 }
 
-export const getStaticProps: GetStaticProps<Props, Params> = async ({ params: { tag } }) => {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params: { tag },
+}) => {
   const posts = getSortedPostsByTag(tag)
 
   if (!posts.length) {
     return {
-      notFound: true
+      notFound: true,
     }
   }
 
   return {
     props: {
       posts,
-      tag
+      tag,
     },
     revalidate: 5,
   }
@@ -56,12 +58,12 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
     return (
       <HomeLayout>
         <Head>
-          <title>{tag}タグで絞り込み - {siteTitle}</title>
+          <title>
+            {tag}タグで絞り込み - {siteTitle}
+          </title>
         </Head>
         <section className={utilStyles.headingMd}>
-          <p>
-            ども
-          </p>
+          <p>ども</p>
           <p>
             (This is a sample website - you’ll be building a site like this on{' '}
             <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
@@ -78,12 +80,12 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   return (
     <HomeLayout>
       <Head>
-        <title>{tag}タグで絞り込み - {siteTitle}</title>
+        <title>
+          {tag}タグで絞り込み - {siteTitle}
+        </title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>
-          ども
-        </p>
+        <p>ども</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
@@ -94,9 +96,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
         <ul className={utilStyles.list}>
           {posts.map(({ id, date, title, tags }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                {title}
-              </Link>
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
               <TagsLayout
                 tags={tags}

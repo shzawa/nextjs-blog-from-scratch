@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react'
 import Head from 'next/head'
 import { ErrorLayout, TitleWithSiteTitle } from '../components/layout'
 
