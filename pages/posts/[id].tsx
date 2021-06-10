@@ -64,7 +64,7 @@ const PostPage: FunctionComponent<Props> = ({
   const router = useRouter()
   if (router.isFallback) {
     return (
-      <PostPageLayout>
+      <PostPageLayout router={router}>
         <TitleWithSiteTitle>Now Loading...</TitleWithSiteTitle>
         <h1>Now Loading...</h1>
       </PostPageLayout>
@@ -72,7 +72,7 @@ const PostPage: FunctionComponent<Props> = ({
   }
 
   return (
-    <PostPageLayout>
+    <PostPageLayout router={router}>
       <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
       <article>
         <h1 className={utilStyles.headingXl}>{title}</h1>

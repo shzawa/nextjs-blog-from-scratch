@@ -1,14 +1,19 @@
 import { FunctionComponent, ReactNode } from 'react'
 import Head from 'next/head'
+import { NextRouter } from 'next/router'
 import { HeadDefault } from './head'
 import { HeaderProfile } from './header'
-import { BackToHomeBtn, TagBtn } from './button'
+import { BackToHomeBtn, TagBtn, BackToPreviousBtn } from './button'
 import styles from './layout.module.css'
 
 export const siteTitle = 'Fragment'
 
 interface Props {
   children: ReactNode
+}
+
+interface PostProps extends Props {
+  router?: NextRouter
 }
 
 const Container: FunctionComponent = ({ children }) => (
@@ -34,11 +39,14 @@ export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
   </Container>
 )
 
-export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
+export const PostPageLayout: FunctionComponent<PostProps> = ({
+  children,
+  router,
+}) => (
   <Container>
     <main>{children}</main>
     <div className={styles.backToHome}>
-      <BackToHomeBtn />
+      <BackToPreviousBtn router={router} />
     </div>
   </Container>
 )
