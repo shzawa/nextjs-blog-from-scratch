@@ -2,12 +2,9 @@ import { FunctionComponent } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
-import {
-  PostPageLayout,
-  TitleWithSiteTitle,
-  TagsLayout,
-} from '../../components/layout'
+import { PostPageLayout, TitleWithSiteTitle } from '../../components/layout'
 import { Date } from '../../components/date'
+import { Tags } from '../../components/tags'
 import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
@@ -76,7 +73,7 @@ const PostPage: FunctionComponent<Props> = ({
       <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
       <article>
         <h1 className={utilStyles.headingXl}>{title}</h1>
-        <TagsLayout
+        <Tags
           tags={tags}
           key={id}
           className={layoutStyles.tags}

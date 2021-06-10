@@ -2,8 +2,9 @@ import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { HomePageLayout, siteTitle, TagsLayout } from '../components/layout'
+import { HomePageLayout, siteTitle } from '../components/layout'
 import { Date } from '../components/date'
+import { Tags } from '../components/tags'
 import layoutStyles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
@@ -34,7 +35,7 @@ const HomePage: FunctionComponent<Props> = ({ posts }) => (
           <li className={utilStyles.listItem} key={id}>
             <Link href={`/posts/${id}`}>{title}</Link>
             <br />
-            <TagsLayout
+            <Tags
               tags={tags}
               key={id}
               className={layoutStyles.tags}

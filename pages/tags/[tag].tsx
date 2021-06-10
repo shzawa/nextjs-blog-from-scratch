@@ -3,12 +3,9 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
-import {
-  TagPageLayout,
-  TagsLayout,
-  TitleWithSiteTitle,
-} from '../../components/layout'
+import { TagPageLayout, TitleWithSiteTitle } from '../../components/layout'
 import { Date } from '../../components/date'
+import { Tags } from '../../components/tags'
 import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts'
@@ -84,7 +81,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              <TagsLayout
+              <Tags
                 tags={tags}
                 key={id}
                 className={layoutStyles.tags}
