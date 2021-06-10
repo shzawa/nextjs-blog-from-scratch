@@ -1,10 +1,13 @@
 import { FunctionComponent } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
-import { siteTitle, HomeLayout, TagsLayout } from '../../components/layout'
+import {
+  HomeLayout,
+  TagsLayout,
+  TitleWithSiteTitle,
+} from '../../components/layout'
 import { Date } from '../../components/date'
 import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
@@ -52,16 +55,16 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
 }
 
+const TagsPageTitle: FunctionComponent<{ tag: string }> = ({ tag }) => (
+  <TitleWithSiteTitle>{tag}タグで絞り込み</TitleWithSiteTitle>
+)
+
 const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
       <HomeLayout>
-        <Head>
-          <title>
-            {tag}タグで絞り込み - {siteTitle}
-          </title>
-        </Head>
+        <TagsPageTitle tag={tag} />
         <section className={utilStyles.headingMd}>
           <p>ども</p>
           <p>
@@ -77,20 +80,10 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
     )
   }
 
+  // 戻るページほしいっす
   return (
     <HomeLayout>
-      <Head>
-        <title>
-          {tag}タグで絞り込み - {siteTitle}
-        </title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <p>ども</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
-        </p>
-      </section>
+      <TagsPageTitle tag={tag} />
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
         <ul className={utilStyles.list}>
