@@ -1,9 +1,9 @@
 import { FunctionComponent, ReactNode } from 'react'
 import Head from 'next/head'
 import { DefaultHead } from './head'
+import { HeaderProfile } from './header'
 import { BackToHomeBtn, TagBtn } from './button'
 import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
 
 export const siteTitle = 'Fragment'
 
@@ -14,6 +14,7 @@ interface Props {
 const Container: FunctionComponent = ({ children }) => (
   <div className={styles.container}>
     <DefaultHead />
+    <HeaderProfile />
     {children}
   </div>
 )
@@ -29,26 +30,12 @@ export const TitleWithSiteTitle: FunctionComponent<Props> = ({ children }) => (
 
 export const HomePageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
-    <header className={utilStyles.headingMd}>
-      <p>ども</p>
-      <p>
-        (This is a sample website - you’ll be building a site like this on{' '}
-        <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
-      </p>
-    </header>
     <main>{children}</main>
   </Container>
 )
 
 export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
-    <header className={utilStyles.headingMd}>
-      <p>ども</p>
-      <p>
-        (This is a sample website - you’ll be building a site like this on{' '}
-        <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
-      </p>
-    </header>
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToHomeBtn />
@@ -58,13 +45,6 @@ export const PostPageLayout: FunctionComponent<Props> = ({ children }) => (
 
 export const TagPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
-    <header className={utilStyles.headingMd}>
-      <p>ども</p>
-      <p>
-        (This is a sample website - you’ll be building a site like this on{' '}
-        <a href="https://nextjs.org/learn">our Next.js tutorial</a>)
-      </p>
-    </header>
     <main>{children}</main>
   </Container>
 )
