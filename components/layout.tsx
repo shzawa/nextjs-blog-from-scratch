@@ -55,6 +55,9 @@ export const TagPageLayout: FunctionComponent<Props> = ({ children }) => (
   <Container>
     <HeaderProfile />
     <main>{children}</main>
+    <div className={styles.backToHome}>
+      <BackToHomeBtn />
+    </div>
   </Container>
 )
 
