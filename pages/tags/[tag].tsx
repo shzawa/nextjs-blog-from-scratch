@@ -67,7 +67,6 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
     )
   }
 
-  // 戻るページほしいっす
   return (
     <TagPageLayout title={setTitle(tag)}>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>

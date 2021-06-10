@@ -19,9 +19,7 @@ interface Params extends ParsedUrlQuery {
   id: string
 }
 
-// 動的ルーティング対応(ルーティングを受け付けるページの[id]リストを生成)
 export const getStaticPaths: GetStaticPaths = async () => {
-  // idとしてとりうる値のリストを返す
   const postIds = getAllPostIds()
   return {
     paths: postIds.map((postId) => ({
@@ -33,11 +31,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-// 静的データの生成
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params: { id },
 }) => {
-  // params.idを使用して、ブログの投稿に必要なデータを取得する
   const post = await getPostData(id)
   if (!post) {
     return {
