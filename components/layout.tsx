@@ -32,16 +32,16 @@ const Container: FunctionComponent = ({ children }) => (
 export const PostsPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
   <Container>
     <HeaderProfile />
-    <Head>
-      <title>{siteTitle}</title>
-    </Head>
+    <TitleWithSiteTitle>Posts</TitleWithSiteTitle>
     <main>{children}</main>
   </Container>
 )
 
 export const AboutPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
   <Container>
-    <TitleWithSiteTitle>About</TitleWithSiteTitle>
+    <Head>
+      <title>{siteTitle}</title>
+    </Head>
     <main>{children}</main>
   </Container>
 )
