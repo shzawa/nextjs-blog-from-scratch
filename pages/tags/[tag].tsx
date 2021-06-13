@@ -35,9 +35,9 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 }
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params: { tag },
+  params,
 }) => {
-  const posts = getSortedPostsByTag(tag)
+  const posts = getSortedPostsByTag(params.tag)
 
   if (!posts.length) {
     return {
@@ -48,9 +48,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   return {
     props: {
       posts,
-      tag,
+      tag: params.tag,
     },
-    revalidate: 5,
+    revalidate: 1,
   }
 }
 

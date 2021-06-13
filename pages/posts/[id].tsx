@@ -32,9 +32,9 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 }
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params: { id },
+  params,
 }) => {
-  const post = await getPostData(id)
+  const post = await getPostData(params.id)
   if (!post) {
     return {
       notFound: true, // pages/404.jsを自動で出力
@@ -51,9 +51,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
 }
 
-const PostPage: FunctionComponent<Props> = ({
-  post: { title, date, tags, id, content },
-}) => {
+// 分割代入のネスト深すぎるとbuild落ちる...
+const PostPage: FunctionComponent<Props> = ({ post }) => {
   const router = useRouter()
   if (router.isFallback) {
     return (
@@ -64,19 +63,19 @@ const PostPage: FunctionComponent<Props> = ({
   }
 
   return (
-    <PostPageLayout title={title} router={router}>
+    <PostPageLayout title={post.title} router={router}>
       <article>
-        <h1 className={utilStyles.headingXl}>{title}</h1>
+        <h1 className={utilStyles.headingXl}>{post.title}</h1>
         <Tags
-          tags={tags}
-          key={id}
+          tags={post.tags}
+          key={post.id}
           className={layoutStyles.tags}
           tagClassName={layoutStyles.tagPostDetail}
         />
         <div className={utilStyles.lightText}>
-          <Date dateStr={date} />
+          <Date dateStr={post.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
     </PostPageLayout>
   )
