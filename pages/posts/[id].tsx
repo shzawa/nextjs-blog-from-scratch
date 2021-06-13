@@ -80,13 +80,13 @@ const PostPage: FunctionComponent<Props> = ({ post }) => {
         />
         <div className={utilStyles.lightText}>
           <Date dateStr={post.date} />{' '}
-          <TwitterShareBtn
-            text={`${post.title} by @tk_zawa`}
-            url={setShareUrl(post.id)}
-          />
         </div>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
+      <TwitterShareBtn
+        text={`${post.title} by @tk_zawa`}
+        url={setShareUrl(post.id)}
+      />
     </PostPageLayout>
   )
 }
