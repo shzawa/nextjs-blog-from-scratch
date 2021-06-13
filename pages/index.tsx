@@ -1,13 +1,11 @@
 import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import { AboutPageLayout } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
-import { Date } from '../components/date'
+import { AboutPageLayout } from '../components/layout'
+import { PostLi } from '../components/postLi'
+import utilStyles from '../styles/utils.module.css'
 import { PostSummary } from '../types/post'
-import { Tags } from '../components/tags'
-import layoutStyles from '../components/layout.module.css'
 
 interface Props {
   posts: PostSummary[]
@@ -27,38 +25,10 @@ const AboutPage: FunctionComponent<Props> = ({ posts }) => {
   const PostsComponent = (
     <ul className={utilStyles.list}>
       {posts.length <= 5
-        ? posts.map(({ id, date, title, tags }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
-              <br />
-              <Tags
-                tags={tags}
-                key={id}
-                className={layoutStyles.tags}
-                tagClassName={layoutStyles.tagPostSummary}
-              />
-              <small className={utilStyles.lightText}>
-                <Date dateStr={date} />
-              </small>
-            </li>
-          ))
+        ? posts.map((post) => <PostLi post={post} key={post.id} />)
         : posts
             .filter((_, index) => index < 5)
-            .map(({ id, date, title, tags }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>{title}</Link>
-                <br />
-                <Tags
-                  tags={tags}
-                  key={id}
-                  className={layoutStyles.tags}
-                  tagClassName={layoutStyles.tagPostSummary}
-                />
-                <small className={utilStyles.lightText}>
-                  <Date dateStr={date} />
-                </small>
-              </li>
-            ))}
+            .map((post) => <PostLi post={post} key={post.id} />)}
       {posts.length > 5 ? (
         <small>
           …or you can find more in the{' '}

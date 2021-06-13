@@ -1,14 +1,11 @@
 import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { PostsPageLayout } from '../components/layout'
-import { Date } from '../components/date'
-import { Tags } from '../components/tags'
-import layoutStyles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
 import { PostSummary } from '../types/post'
+import { PostLi } from '../components/postLi'
 
 interface Props {
   posts: PostSummary[]
@@ -42,20 +39,8 @@ const PostsPage: FunctionComponent<Props> = ({ posts }) => {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Posts</h2>
         <ul className={utilStyles.list}>
-          {posts.map(({ id, date, title, tags }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
-              <br />
-              <Tags
-                tags={tags}
-                key={id}
-                className={layoutStyles.tags}
-                tagClassName={layoutStyles.tagPostSummary}
-              />
-              <small className={utilStyles.lightText}>
-                <Date dateStr={date} />
-              </small>
-            </li>
+          {posts.map((post) => (
+            <PostLi post={post} key={post.id} />
           ))}
         </ul>
       </section>
