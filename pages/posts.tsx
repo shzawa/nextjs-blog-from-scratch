@@ -30,7 +30,7 @@ const PostsPage: FunctionComponent<Props> = ({ posts }) => {
     return (
       <PostsPageLayout>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>Articles</h2>
+          <h2 className={utilStyles.headingLg}>Posts</h2>
           Now Loading...
         </section>
       </PostsPageLayout>
@@ -40,7 +40,7 @@ const PostsPage: FunctionComponent<Props> = ({ posts }) => {
   return (
     <PostsPageLayout>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Articles</h2>
+        <h2 className={utilStyles.headingLg}>Posts</h2>
         <ul className={utilStyles.list}>
           {posts.map(({ id, date, title, tags }) => (
             <li className={utilStyles.listItem} key={id}>

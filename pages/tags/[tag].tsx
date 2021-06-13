@@ -60,7 +60,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
     return (
       <TagPageLayout title={setTitle(tag)}>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
+          <h2 className={utilStyles.headingLg}>Posts - Filter by {tag}</h2>
           Now Loading...
         </section>
       </TagPageLayout>
@@ -70,7 +70,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   return (
     <TagPageLayout title={setTitle(tag)}>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Articles - Filter by {tag}</h2>
+        <h2 className={utilStyles.headingLg}>Posts - Filter by {tag}</h2>
         <ul className={utilStyles.list}>
           {posts.map(({ id, date, title, tags }) => (
             <li className={utilStyles.listItem} key={id}>
