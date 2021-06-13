@@ -10,6 +10,7 @@ import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import { PostDetail } from '../../types/post'
+import { TwitterShareBtn } from '../../components/button'
 
 interface Props {
   post: PostDetail
@@ -18,6 +19,11 @@ interface Props {
 interface Params extends ParsedUrlQuery {
   id: string
 }
+
+const setShareUrl = (id: string) =>
+  process.env.HOST
+    ? `${process.env.HOST}/posts/${id}`
+    : `https://tkzawa.vercel.app/posts/${id}`
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const postIds = getAllPostIds()
@@ -73,10 +79,14 @@ const PostPage: FunctionComponent<Props> = ({ post }) => {
           tagClassName={layoutStyles.tagPostDetail}
         />
         <div className={utilStyles.lightText}>
-          <Date dateStr={post.date} />
+          <Date dateStr={post.date} />{' '}
         </div>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
+      <TwitterShareBtn
+        text={`${post.title} by @tk_zawa`}
+        url={setShareUrl(post.id)}
+      />
     </PostPageLayout>
   )
 }
