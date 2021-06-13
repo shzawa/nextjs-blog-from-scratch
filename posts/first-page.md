@@ -1,7 +1,7 @@
 ---
-title: 'When to Use Static Generation v.s. Server-side Rendering'
-date: '2020-01-02'
-tags: ['aaa', 'ccc']
+title: 'First Page'
+date: '2020-06-13'
+tags: []
 ---
 
 We recommend using **Static Generation** (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.
@@ -20,15 +20,7 @@ On the other hand, Static Generation is **not** a good idea if you cannot pre-re
 In that case, you can use **Server-Side Rendering**. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate data.
 
 ```js:hoge.js
-const fileContents = fs.readFileSync(fullPath, 'utf8')
-
-// 投稿のメタデータ部分を解析するためにgray-matterを使う
-const matterResult = matter(fileContents)
-
-// MarkdownをHTML文字列に変換する為にremarkを使う
-const processedContent = await remark()
-  .use(prism, { plugins: ['line-numbers'] })
-  .use(html)
-  .process(matterResult.content)
-const contentHtml = processedContent.toString()
+interface Props {
+  posts: PostSummary[]
+}
 ```
