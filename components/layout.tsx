@@ -4,7 +4,7 @@ import { NextRouter } from 'next/router'
 import { HeadDefault } from './head'
 import { TitleWithSiteTitle } from './title'
 import { HeaderProfile } from './header'
-import { BackToHomeBtn, BackToPreviousBtn } from './button'
+import { BackToPostsBtn, BackToPreviousBtn } from './button'
 import styles from './layout.module.css'
 
 export const siteTitle = 'Fragment'
@@ -29,12 +29,19 @@ const Container: FunctionComponent = ({ children }) => (
   </div>
 )
 
-export const HomePageLayout: FunctionComponent<HomeProps> = ({ children }) => (
+export const PostsPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
   <Container>
     <HeaderProfile />
     <Head>
       <title>{siteTitle}</title>
     </Head>
+    <main>{children}</main>
+  </Container>
+)
+
+export const AboutPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
+  <Container>
+    <TitleWithSiteTitle>About</TitleWithSiteTitle>
     <main>{children}</main>
   </Container>
 )
@@ -62,7 +69,7 @@ export const TagPageLayout: FunctionComponent<Props> = ({
     <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>
-      <BackToHomeBtn />
+      <BackToPostsBtn />
     </div>
   </Container>
 )
@@ -76,7 +83,7 @@ export const ErrorPageLayout: FunctionComponent<Props> = ({
     <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>
-      <BackToHomeBtn />
+      <BackToPostsBtn />
     </div>
   </Container>
 )

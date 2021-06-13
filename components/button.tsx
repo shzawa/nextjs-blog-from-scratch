@@ -11,9 +11,9 @@ export const BackToPreviousBtn: FunctionComponent<{ router: NextRouter }> = ({
   </a>
 )
 
-export const BackToHomeBtn: FunctionComponent = () => (
-  <Link href="/">
-    <a className={styles.backToHome}>← Back to home</a>
+export const BackToPostsBtn: FunctionComponent = () => (
+  <Link href="/posts">
+    <a className={styles.backToHome}>← Back to Posts</a>
   </Link>
 )
 
