@@ -31,7 +31,6 @@ const Container: FunctionComponent = ({ children }) => (
 
 export const PostsPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
   <Container>
-    <HeaderProfile />
     <TitleWithSiteTitle>Posts</TitleWithSiteTitle>
     <main>{children}</main>
   </Container>
@@ -42,6 +41,7 @@ export const AboutPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
     <Head>
       <title>{siteTitle}</title>
     </Head>
+    <HeaderProfile />
     <main>{children}</main>
   </Container>
 )
@@ -66,7 +66,6 @@ export const TagPageLayout: FunctionComponent<Props> = ({
 }) => (
   <Container>
     <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
-    <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToPostsBtn />
@@ -80,7 +79,6 @@ export const ErrorPageLayout: FunctionComponent<Props> = ({
 }) => (
   <Container>
     <TitleWithSiteTitle>{title}</TitleWithSiteTitle>
-    <HeaderProfile />
     <main>{children}</main>
     <div className={styles.backToHome}>
       <BackToPostsBtn />
