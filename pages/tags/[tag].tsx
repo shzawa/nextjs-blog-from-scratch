@@ -1,15 +1,12 @@
 import { FunctionComponent } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
 import { TagPageLayout } from '../../components/layout'
-import { Date } from '../../components/date'
-import { Tags } from '../../components/tags'
-import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts'
 import { PostSummary } from '../../types/post'
+import { PostLi } from '../../components/postLi'
 
 interface Props {
   posts: PostSummary[]
@@ -20,7 +17,8 @@ interface Params extends ParsedUrlQuery {
   tag: string
 }
 
-const setTitle = (title: string) => `${title} - タグで絞り込み`
+const setTitle = (tag: string) => `${tag} - タグで絞り込み`
+const setHeadline = (tag: string) => `Posts - Filter by “${tag}”`
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const tags = getUniqueAllTags()
@@ -60,11 +58,7 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
     return (
       <TagPageLayout title={setTitle(tag)}>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>
-            Posts - Filter by {`“`}
-            {tag}
-            {`”`}
-          </h2>
+          <h2 className={utilStyles.headingLg}>{setHeadline(tag)}</h2>
           Now Loading...
         </section>
       </TagPageLayout>
@@ -74,26 +68,10 @@ const TagListPage: FunctionComponent<Props> = ({ posts, tag }) => {
   return (
     <TagPageLayout title={setTitle(tag)}>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>
-          Posts - Filter by {`“`}
-          {tag}
-          {`”`}
-        </h2>
+        <h2 className={utilStyles.headingLg}>{setHeadline(tag)}</h2>
         <ul className={utilStyles.list}>
-          {posts.map(({ id, date, title, tags }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
-              <br />
-              <Tags
-                tags={tags}
-                key={id}
-                className={layoutStyles.tags}
-                tagClassName={layoutStyles.tagPostSummary}
-              />
-              <small className={utilStyles.lightText}>
-                <Date dateStr={date} />
-              </small>
-            </li>
+          {posts.map((post) => (
+            <PostLi post={post} key={post.id} />
           ))}
         </ul>
       </section>
