@@ -1,7 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react'
 import Head from 'next/head'
+import styled from 'styled-components'
 import { NextRouter } from 'next/router'
-import { HeadDefault } from '../../head'
+// import { HeadDefault } from '../../head'
 import { TitleWithSiteTitle } from '../../title'
 import { HeaderProfile } from '../../header'
 import { BackToPostsBtn, BackToPreviousBtn } from '../../button'
@@ -22,11 +23,8 @@ interface PostProps extends Props {
   router?: NextRouter
 }
 
-const Container: FunctionComponent = ({ children }) => (
-  <div className={styles.container}>
-    <HeadDefault />
-    {children}
-  </div>
+export const Container: FunctionComponent = ({ children }) => (
+  <StyledContainer>{children}</StyledContainer>
 )
 
 export const PostsPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
@@ -85,3 +83,11 @@ export const ErrorPageLayout: FunctionComponent<Props> = ({
     </div>
   </Container>
 )
+
+const StyledContainer = styled.div`
+  .container {
+    max-width: 36rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+  }
+`
