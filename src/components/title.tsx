@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from 'react'
 import Head from 'next/head'
-import { siteTitle } from './layout'
+import { siteTitle } from './layouts/Template'
 
 interface Props {
   children: ReactNode

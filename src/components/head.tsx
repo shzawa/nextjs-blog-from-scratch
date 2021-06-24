@@ -3,7 +3,7 @@ import HeadField from 'next/head'
 import Link from 'next/link'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
-import { siteTitle } from './layout'
+import { siteTitle } from './layouts/Template'
 
 export const HeadDefault: FunctionComponent = () => (
   <>

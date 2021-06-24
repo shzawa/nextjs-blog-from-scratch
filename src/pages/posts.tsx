@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { PostsPageLayout } from '../components/layout'
+import { PostsPageLayout } from '../components/layouts/Template'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
 import { PostSummary } from '../../types/post'

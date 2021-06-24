@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import Head from 'next/head'
-import { ErrorPageLayout } from '../../components/layout'
+import { ErrorPageLayout } from '../../components/layouts/Template'
 
 const NotFound: FunctionComponent = () => {
   return (
