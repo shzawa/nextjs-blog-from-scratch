@@ -25,10 +25,6 @@ interface PostProps extends Props {
   router?: NextRouter
 }
 
-export const Container: FunctionComponent = ({ children }) => (
-  <StyledContainer>{children}</StyledContainer>
-)
-
 export const PostsPageLayout: FunctionComponent<HomeProps> = ({ children }) => (
   <Container>
     <TitleWithSiteTitle>Posts</TitleWithSiteTitle>
@@ -128,7 +124,7 @@ export const Template: FunctionComponent<TemplateProps> = ({
   </>
 )
 
-const StyledContainer = styled.div`
+const Container = styled.div`
   max-width: 36rem;
   padding: 0 1rem;
   margin: 3rem auto 6rem;

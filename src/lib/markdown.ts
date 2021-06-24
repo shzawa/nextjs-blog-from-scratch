@@ -10,6 +10,6 @@ export const markdownToHtml = async (markdown: string): Promise<string> => {
     .use(unwrapImages)
     .use(highlight)
     .use(html)
-    .process(markdown)
+    .processSync(markdown)
   return processedContent.toString()
 }

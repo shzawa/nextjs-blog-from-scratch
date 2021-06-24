@@ -13,7 +13,7 @@ export const Header: FunctionComponent = () => (
   </StyledHeader>
 )
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
