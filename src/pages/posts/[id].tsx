@@ -9,7 +9,7 @@ import layoutStyles from '../../components/layout.module.css'
 import utilStyles from '../../styles/utils.module.css'
 import { markdownToHtml } from '../../lib/markdown'
 import { getAllPostIds, getPostData } from '../../lib/posts'
-import { PostDetail } from '../../types/post'
+import { PostDetail } from '../../../types/post'
 import { TwitterShareBtn } from '../../components/button'
 
 interface Props {

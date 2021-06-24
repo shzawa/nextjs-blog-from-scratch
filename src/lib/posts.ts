@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import type { PostMetaData, PostSummary, PostDetail } from '../types/post'
+import type { PostMetaData, PostSummary, PostDetail } from '../../types/post'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { PostsPageLayout } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPosts } from '../lib/posts'
-import { PostSummary } from '../types/post'
+import { PostSummary } from '../../types/post'
 import { PostLi } from '../components/postLi'
 
 interface Props {

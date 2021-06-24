@@ -5,7 +5,7 @@ import { getSortedPosts } from '../lib/posts'
 import { AboutPageLayout } from '../components/layout'
 import { PostLi } from '../components/postLi'
 import utilStyles from '../styles/utils.module.css'
-import { PostSummary } from '../types/post'
+import { PostSummary } from '../../types/post'
 
 interface Props {
   posts: PostSummary[]

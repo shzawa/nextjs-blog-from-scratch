@@ -5,7 +5,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { TagPageLayout } from '../../components/layout'
 import utilStyles from '../../styles/utils.module.css'
 import { getSortedPostsByTag, getUniqueAllTags } from '../../lib/posts'
-import { PostSummary } from '../../types/post'
+import { PostSummary } from '../../../types/post'
 import { PostLi } from '../../components/postLi'
 
 interface Props {
