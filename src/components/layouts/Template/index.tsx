@@ -85,9 +85,7 @@ export const ErrorPageLayout: FunctionComponent<Props> = ({
 )
 
 const StyledContainer = styled.div`
-  .container {
-    max-width: 36rem;
-    padding: 0 1rem;
-    margin: 3rem auto 6rem;
-  }
+  max-width: 36rem;
+  padding: 0 1rem;
+  margin: 3rem auto 6rem;
 `
